@@ -1,0 +1,6 @@
+[submodule "volley"]
+	path = volley
+	url = https://android.googlesource.com/platform/frameworks/volley
+[submodule "ActionBar-PullToRefresh"]
+	path = ActionBar-PullToRefresh
+	url = https://github.com/chrisbanes/ActionBar-PullToRefresh.git
