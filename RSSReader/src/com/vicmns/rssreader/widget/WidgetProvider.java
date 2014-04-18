@@ -1,9 +1,11 @@
 package com.vicmns.rssreader.widget;
 
 import com.vicmns.rssreader.R;
+import com.vicmns.rssreader.activities.RssItemDetailsActivity;
 import com.vicmns.rssreader.services.GetRssItemsService;
 
 import android.annotation.SuppressLint;
+import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
@@ -80,6 +82,11 @@ public class WidgetProvider extends AppWidgetProvider {
 		
 		remoteViews.setViewVisibility(R.id.widget_loading_indicator, View.GONE);
 		remoteViews.setEmptyView(R.id.widget_main_layout, R.id.widget_empty_view_layout);
+		
+		Intent startActivityIntent = new Intent(context, RssItemDetailsActivity.class);
+        PendingIntent startActivityPendingIntent = PendingIntent.getActivity(context, 0, startActivityIntent, 0);
+        remoteViews.setPendingIntentTemplate(R.id.widget_list_view, startActivityPendingIntent);
+
 		
 		return remoteViews;
 	}

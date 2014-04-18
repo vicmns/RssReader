@@ -43,6 +43,7 @@ public class MainActivity extends ActionBarActivity implements
 		setContentView(R.layout.activity_main);
 		initializeViews();
 		initializeRssDownload();
+		getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 	}
 	
 	private void initializeViews() {

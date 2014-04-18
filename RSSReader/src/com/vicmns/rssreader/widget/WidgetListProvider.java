@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.vicmns.rssreader.R;
+import com.vicmns.rssreader.activities.RssItemDetailsActivity;
 import com.vicmns.rssreader.models.RssItem;
 import com.vicmns.rssreader.models.RssItems;
 
@@ -58,12 +59,19 @@ public class WidgetListProvider implements RemoteViewsFactory {
 	public RemoteViews getViewAt(int position) {
 		final RemoteViews remoteView = new RemoteViews(
 				context.getPackageName(), R.layout.rss_simple_list_item);
+		
 		remoteView.setTextViewText(R.id.rss_list_item_title_textView, rssItemList.get(position).getTitle());
 		
 		DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
 		
 		remoteView.setTextViewText(R.id.rss_list_item_date_textView,
 				df.format(rssItemList.get(position).getPubDate()));
+		
+		Intent intent = new Intent(context, RssItemDetailsActivity.class);
+		intent.putExtra("RssItem", rssItemList.get(position));
+		intent.setAction(Intent.ACTION_SEND);
+		
+        remoteView.setOnClickFillInIntent(R.id.rss_list_item_layout, intent);
 
 		return remoteView;
 	}

@@ -29,7 +29,11 @@
         <activity
             android:name="com.vicmns.rssreader.activities.RssItemDetailsActivity"
             android:label="@string/app_name"
-            android:parentActivityName="com.vicmns.rssreader.activities.MainActivity" />
+            android:parentActivityName="com.vicmns.rssreader.activities.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.vicmns.rssreader.activities.MainActivity" />
+        </activity>
 
         <receiver android:name="com.vicmns.rssreader.widget.WidgetProvider" >
             <intent-filter>

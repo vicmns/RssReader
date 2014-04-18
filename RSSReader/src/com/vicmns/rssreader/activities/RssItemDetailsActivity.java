@@ -5,12 +5,14 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.vicmns.rssreader.R;
 import com.vicmns.rssreader.models.RssItem;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v4.app.TaskStackBuilder;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -35,7 +37,7 @@ public class RssItemDetailsActivity extends ActionBarActivity {
 		.considerExifParams(true)
 		.bitmapConfig(Bitmap.Config.ARGB_8888)
 		.build();
-		
+				
 		Bundle bundle = getIntent().getExtras();
 		if(bundle != null) {
 			rssItem = bundle.getParcelable("RssItem");
@@ -63,7 +65,7 @@ public class RssItemDetailsActivity extends ActionBarActivity {
 	    switch (menuItem.getItemId()) {
 	    case android.R.id.home:
 	    	Intent upIntent = NavUtils.getParentActivityIntent(this);
-	        if (NavUtils.shouldUpRecreateTask(this, upIntent)) {
+	        if (NavUtils.shouldUpRecreateTask(this, upIntent) || getIntent().getAction() != null) {
 	            TaskStackBuilder.create(this)
 	                    // Add all of this activity's parents to the back stack
 	                    .addNextIntentWithParentStack(upIntent)
@@ -80,10 +82,10 @@ public class RssItemDetailsActivity extends ActionBarActivity {
 	         * Intent homeIntent = new Intent(this, HomeActivity.class);
 	         * homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 	         * startActivity(homeIntent);
+	         * finish();
 	         */
 	    }
 	  return (super.onOptionsItemSelected(menuItem));
 	}
-	
 	
 }
