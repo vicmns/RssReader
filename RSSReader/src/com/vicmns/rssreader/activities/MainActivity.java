@@ -42,10 +42,20 @@ public class MainActivity extends ActionBarActivity implements
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		initializeViews();
-		initializeRssDownload();
 		getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 	}
 	
+	
+	
+	@Override
+	protected void onStart() {
+		super.onStart();
+	    setPullToRefresh();
+	    initializeRssDownload();
+	}
+
+
+
 	private void initializeViews() {
 		listOverlayLayoutView = new ListOverlayLayoutView(
 				(FrameLayout) findViewById(R.id.list_overlay_layout),
@@ -53,14 +63,18 @@ public class MainActivity extends ActionBarActivity implements
 		mPullToRefreshLayout = (PullToRefreshLayout) findViewById(R.id.ptr_layout);
 		rssItemsListView = (ListView) findViewById(R.id.main_list_view);
 		
+		
+		rssItemsListView.setVisibility(View.INVISIBLE);
+		rssItemsListView.setOnItemClickListener(this);
+		listOverlayLayoutView.showLoadingView();
+	}
+	
+	private void setPullToRefresh() {
 		// Now setup the PullToRefreshLayout
 	    ActionBarPullToRefresh.from(this)
 	            .theseChildrenArePullable(rssItemsListView)
 	            .listener(this)
 	            .setup(mPullToRefreshLayout);
-		rssItemsListView.setVisibility(View.INVISIBLE);
-		rssItemsListView.setOnItemClickListener(this);
-		listOverlayLayoutView.showLoadingView();
 	}
 	
 	private void initializeRssDownload() {
