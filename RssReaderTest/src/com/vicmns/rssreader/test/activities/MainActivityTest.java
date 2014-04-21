@@ -34,7 +34,7 @@ public class MainActivityTest {
 	public void activityViewsInitState() {
 		ListView listView = (ListView) activity.findViewById(R.id.main_list_view);
 		assertThat(listView).isNotNull();
-		assertThat(listView).isGone();
+		assertThat(listView).isInvisible();
 		
 		ProgressBar progressBar = (ProgressBar) activity.findViewById(R.id.list_overlay_progressbar);
 		assertThat(progressBar).isNotNull();
